@@ -34,6 +34,7 @@ function List({setListItems, listItems}) {
                             <input name={index}
                                    type="text"
                                    onChange={(e) =>  updateInput(e)}
+                                   key={item.title}
                                    defaultValue={item.title}/>
                             &nbsp;
                             <button onClick={() => deleteFromList(index)}>X</button>
