@@ -13,14 +13,12 @@ function Form ({setListItems, listItems}) {
 
     return (
         <div>
-            <form onSubmit={addTodo}>
-                <div>
-                    <span>
-                        #
-                    </span>
-                    <input name="title" type="text" placeholder="What needs to be done ?"/>
-                </div>
-            </form>
+            <header className="header">
+                <h1>todos</h1>
+                <form onSubmit={addTodo}>
+                    <input className="new-todo" type="text" placeholder="What needs to be done ?" autoFocus/>
+                </form>
+            </header>
         </div>
     );
 }
