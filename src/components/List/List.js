@@ -72,6 +72,7 @@ function List({setListItems, listItems}) {
                                            onChange={(e) => updateInput(e)}
                                            key={item.title}
                                            defaultValue={item.title}
+                                           className={item.isFinished ? "completed-text" : ""}
                                     />
                                     &nbsp;
                                     <button className="destroy" onClick={() => deleteFromList(index)}></button>
@@ -85,7 +86,7 @@ function List({setListItems, listItems}) {
 
             <footer className="footer">
                     <span className="todo-count">
-                        <strong>{listItems.length === 0 ? "There are no items" : (listItems.length) + " items left"}</strong>
+                        <strong>{listItems.length === 0 ? "There are no items" : (listItems.length -1) + " items left"}</strong>
                     </span>
                 <ul className="filters">
 
