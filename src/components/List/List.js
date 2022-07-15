@@ -1,8 +1,9 @@
-import {useRef} from "react";
+import {useMemo, useRef} from "react";
 
 function List({setListItems, listItems}) {
 
     const listItem = useRef();
+
 
     const deleteFromList = (index) => {
         listItems.splice(index, 1);
@@ -35,16 +36,12 @@ function List({setListItems, listItems}) {
     // }
 
     //todo: update sıkıntısı giderilecek.
-    const updateInput = (e) => {
-        e.preventDefault();
-        listItems[e.target.name] = {title: e.target.value, isFinished: false};
-        setListItems([...listItems, Object.assign({}, listItems[e.target.name], {
-            title: e.target.value,
-            isFinished: listItems[e.target.name].isFinished
-        })]);
-        listItems.splice(listItems.length, 1);
-        setListItems([...listItems]);
-    }
+    const updateInput = useMemo(() => {
+        return (e,setListItems) => {
+            e.preventDefault();
+            listItems[e.target.name] = {title: e.target.value, isFinished: listItems[e.target.name].isFinished};
+        };
+    },[listItems]);
 
     const clearCompleted = () => {
         setListItems(listItems.filter((item) => item.isFinished === false && item.title !== ""));
@@ -69,7 +66,7 @@ function List({setListItems, listItems}) {
                                     &nbsp;
                                     <input name={index}
                                            type="text"
-                                           onChange={(e) => updateInput(e)}
+                                           onChange={updateInput}
                                            key={item.title}
                                            defaultValue={item.title}
                                            className={item.isFinished ? "completed-text" : ""}
